@@ -1,0 +1,7 @@
+version: '3'
+services:
+  discovery:
+    image: booking/discovery:0.0.1-SNAPSHOT
+    ports:
+      - "8761:8761"
+    restart: always

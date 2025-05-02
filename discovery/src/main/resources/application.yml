@@ -1,0 +1,22 @@
+spring:
+  application:
+    name: discovery
+  profiles:
+    active: native
+  cloud:
+    config:
+      server:
+        native:
+          searchLocations:
+            - classpath:/config/
+            - file:./config/
+
+server:
+  port: 8761
+
+eureka:
+  client:
+    fetchRegistry: false
+    registerWithEureka: false
+  server:
+    waitTimeInMsWhenSyncEmpty: 0
