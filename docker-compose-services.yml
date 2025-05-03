@@ -5,3 +5,19 @@ services:
     ports:
       - "8761:8761"
     restart: always
+
+  auth-service:
+    image: booking/auth-service:0.0.1-SNAPSHOT
+    ports:
+      - "8083:8083"
+    environment:
+      - CONFIG_URI=http://discovery:8761
+      - EUREKA_URI=http://discovery:8761/eureka
+      - DATABASE_URL=jdbc:postgresql://psql:5432/auth_user_db
+      - DATABASE_USER=postgres
+      - DATABASE_PASSWORD=postgres
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+    restart: always
+    depends_on:
+      - discovery

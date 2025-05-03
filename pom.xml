@@ -18,6 +18,7 @@
     <description>Educational project</description>
     <modules>
         <module>discovery</module>
+        <module>auth-service</module>
     </modules>
     <packaging>pom</packaging>
 

@@ -1,0 +1,35 @@
+spring:
+  application:
+    name: auth-service
+  liquibase:
+    enabled: true
+    drop-first: true
+    default-schema: public
+    change-log: classpath:db/changelog_init.xml
+  datasource:
+    url: ${DATABASE_URL:jdbc:postgresql://localhost:5432/auth_user_db}
+    username: ${DATABASE_USER:postgres}
+    password: ${DATABASE_PASSWORD:postgres}
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+      format_sql: true
+      show-sql: true
+  redis:
+    host: ${REDIS_HOST:localhost}
+    port: ${REDIS_PORT:6379}
+
+jwt:
+  access-token-secret: B9vPHGM8C0ia4uOuxxqPD5DTbWC9F9TWvPStp3pb7ARo0oK2mJ3pd3YG4lxA9i8bj6OTbadwezxgeEByY
+  access-token-expiration-time: 60m
+  refresh-token-expiration-time: 30d
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: ${EUREKA_URI:http://localhost:8761/eureka/}
+    enabled: true
+
+server:
+  port: 8083
