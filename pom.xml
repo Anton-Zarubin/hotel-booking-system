@@ -19,6 +19,7 @@
     <modules>
         <module>discovery</module>
         <module>auth-service</module>
+        <module>gateway</module>
     </modules>
     <packaging>pom</packaging>
 
