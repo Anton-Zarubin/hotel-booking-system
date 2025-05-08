@@ -1,0 +1,40 @@
+spring:
+  application:
+    name: hotel-service
+  liquibase:
+    enabled: true
+    drop-first: true
+    default-schema: public
+    change-log: classpath:db/changelog_init.xml
+  datasource:
+    url: ${DATABASE_URL:jdbc:postgresql://localhost:5432/hotel_db}
+    username: ${DATABASE_USER:postgres}
+    password: ${DATABASE_PASSWORD:postgres}
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: validate
+      format_sql: true
+      show-sql: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    shutdown:
+      enabled: true
+    health:
+      show-details: always
+    metrics:
+      enabled: true
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: ${EUREKA_URI:http://localhost:8761/eureka/}
+    enabled: true
+
+server:
+  port: 8081

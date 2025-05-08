@@ -1,6 +1,10 @@
+server:
+  servlet:
+    context-path: /hotel-service
+
 spring:
   application:
-    name: gateway
+    name: hotel-service
   profiles:
     active: local
   cloud:
@@ -14,12 +18,3 @@ eureka:
       defaultZone: ${EUREKA_URI:http://localhost:8761/eureka}
   instance:
     preferIpAddress: true
-
-springdoc:
-  swagger-ui:
-    use-root-path: true
-    urls:
-      - name: auth
-        url: /auth-service/v3/api-docs
-      - name: hotel
-        url: /hotel-service/v3/api-docs

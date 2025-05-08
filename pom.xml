@@ -20,6 +20,7 @@
         <module>discovery</module>
         <module>auth-service</module>
         <module>gateway</module>
+        <module>hotel-service</module>
     </modules>
     <packaging>pom</packaging>
 

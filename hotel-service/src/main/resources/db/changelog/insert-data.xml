@@ -1,0 +1,50 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                                       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.0.xsd">
+
+    <changeSet id="insert_data" author="Anton-Zarubin">
+        <insert tableName="hotels">
+            <column name="name" value="Arbat Hotel"/>
+            <column name="city" value="Moscow"/>
+            <column name="address" value="Plotnikov Lane, 12"/>
+            <column name="distance_from_the_city_center" value="2100"/>
+            <column name="rating" value="0.0"/>
+            <column name="number_of_rating" value="0"/>
+        </insert>
+        <insert tableName="hotels">
+            <column name="name" value="Angleterre Hotel"/>
+            <column name="city" value="St Petersburg"/>
+            <column name="address" value="Ul. Malaya Morskaya 24"/>
+            <column name="distance_from_the_city_center" value="500"/>
+            <column name="rating" value="0.0"/>
+            <column name="number_of_rating" value="0"/>
+        </insert>
+        <insert tableName="rooms">
+            <column name="name" value="Standard"/>
+            <column name="description" value="Some description"/>
+            <column name="number" value="21"/>
+            <column name="price" value="8400.00"/>
+            <column name="capacity" value="2"/>
+            <column name="hotel_id" value="1"/>
+        </insert>
+        <insert tableName="rooms">
+            <column name="name" value="De luxe"/>
+            <column name="description" value="Some description"/>
+            <column name="number" value="47"/>
+            <column name="price" value="9900.00"/>
+            <column name="capacity" value="2"/>
+            <column name="hotel_id" value="1"/>
+        </insert>
+        <insert tableName="rooms">
+            <column name="name" value="Standard"/>
+            <column name="description" value="Some description"/>
+            <column name="number" value="21"/>
+            <column name="price" value="18000.00"/>
+            <column name="capacity" value="2"/>
+            <column name="hotel_id" value="2"/>
+        </insert>
+    </changeSet>
+
+</databaseChangeLog>
