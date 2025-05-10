@@ -21,5 +21,7 @@ springdoc:
     urls:
       - name: auth
         url: /auth-service/v3/api-docs
+      - name: booking
+        url: /booking-service/v3/api-docs
       - name: hotel
         url: /hotel-service/v3/api-docs

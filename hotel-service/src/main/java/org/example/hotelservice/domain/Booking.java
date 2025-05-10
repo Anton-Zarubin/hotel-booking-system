@@ -10,11 +10,11 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @Setter
 @Getter
+@Builder
 @Table(name = "booking")
 public class Booking {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne

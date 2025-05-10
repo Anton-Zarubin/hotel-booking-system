@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                                       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.0.xsd">
+
+    <changeSet id="create_booking_status_history_table" author="Anton-Zarubin">
+        <createTable tableName="booking_status_history">
+            <column name="id" type="bigint" autoIncrement="true" defaultOnNull="false" generationType="ALWAYS">
+                <constraints primaryKey="true" nullable="false" />
+            </column>
+            <column name="status" type="varchar(18)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="service_name" type="varchar(32)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="comment" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="timestamp" type="timestamp">
+                <constraints nullable="false"/>
+            </column>
+            <column name="booking_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addForeignKeyConstraint baseColumnNames="booking_id"
+                                 baseTableName="booking_status_history" constraintName="fk_status_booking"
+                                 referencedColumnNames="id" referencedTableName="booking"/>
+    </changeSet>
+
+</databaseChangeLog>

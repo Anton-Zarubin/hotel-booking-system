@@ -12,6 +12,7 @@ public class RouterValidator {
             Pattern.compile("/auth-service/users/signup"),
             Pattern.compile("/auth-service/auth/login"),
             Pattern.compile("/auth-service/v3/api-docs.*"),
+            Pattern.compile("/booking-service/v3/api-docs.*"),
             Pattern.compile("/hotel-service/v3/api-docs.*")
     );
 

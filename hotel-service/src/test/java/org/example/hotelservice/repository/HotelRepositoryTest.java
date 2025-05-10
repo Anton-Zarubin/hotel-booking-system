@@ -1,7 +1,6 @@
 package org.example.hotelservice.repository;
 
 import org.example.hotelservice.domain.Hotel;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
@@ -19,11 +18,6 @@ public class HotelRepositoryTest {
 
     @Autowired
     private HotelRepository hotelRepositoryJpa;
-
-    @BeforeEach
-    public void setUp() {
-        entityManager.clear();
-    }
 
     @Test
     public void whenGetById_thenReturnHotel() {

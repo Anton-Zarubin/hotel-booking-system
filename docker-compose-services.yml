@@ -22,6 +22,21 @@ services:
     depends_on:
       - discovery
 
+  booking-service:
+    image: booking/booking-service:0.0.1-SNAPSHOT
+    ports:
+      - "8080:8080"
+    environment:
+      - CONFIG_URI=http://discovery:8761
+      - EUREKA_URI=http://discovery:8761/eureka
+      - DATABASE_URL=jdbc:postgresql://psql:5432/booking_db
+      - DATABASE_USER=postgres
+      - DATABASE_PASSWORD=postgres
+      - KAFKA_BOOTSTRAP_SERVERS=kafka:9092
+    restart: always
+    depends_on:
+      - discovery
+
   hotel-service:
     image: booking/hotel-service:0.0.1-SNAPSHOT
     ports:
@@ -32,6 +47,7 @@ services:
       - DATABASE_URL=jdbc:postgresql://psql:5432/hotel_db
       - DATABASE_USER=postgres
       - DATABASE_PASSWORD=postgres
+      - KAFKA_BOOTSTRAP_SERVERS=kafka:9092
     restart: always
     depends_on:
       - discovery
@@ -47,4 +63,5 @@ services:
     depends_on:
       - discovery
       - auth-service
+      - booking-service
       - hotel-service

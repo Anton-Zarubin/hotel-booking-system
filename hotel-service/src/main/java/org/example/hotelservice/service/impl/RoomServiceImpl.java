@@ -33,10 +33,15 @@ public class RoomServiceImpl implements RoomService {
     }
 
     @Override
-    public RoomResponse getById(Long id) {
-        return roomMapper.roomToResponse(roomRepository.findById(id)
+    public Room getRoomById(Long id) {
+        return roomRepository.findById(id)
                 .orElseThrow(() ->
-                        new EntityNotFoundException(MessageFormat.format("Room with id {0} not found", id))));
+                        new EntityNotFoundException(MessageFormat.format("Room with id {0} not found", id)));
+    }
+
+    @Override
+    public RoomResponse getById(Long id) {
+        return roomMapper.roomToResponse(getRoomById(id));
     }
 
     @Override
@@ -49,8 +54,7 @@ public class RoomServiceImpl implements RoomService {
     @Transactional
     @Override
     public RoomResponse update(Long id, UpdateRoomRequest request) {
-        Room room = roomRepository.findById(id).orElseThrow(() ->
-                new EntityNotFoundException(MessageFormat.format("Room with id {0} not found", id)));
+        Room room = getRoomById(id);
         roomMapper.update(id, request, room);
         return roomMapper.roomToResponse(roomRepository.save(room));
     }

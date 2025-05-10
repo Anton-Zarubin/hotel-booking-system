@@ -25,6 +25,11 @@ public class GatewayConfig {
                                 .uri("lb://AUTH-SERVICE")
                 )
                 .route(
+                        "booking_route", r -> r.path("/booking-service/**")
+                                .filters(f -> f.filter(authenticationFilter))
+                                .uri("lb://BOOKING-SERVICE")
+                )
+                .route(
                         "hotel_route", r -> r.path("/hotel-service/v3/api-docs",
                                         "/hotel-service/hotels/rate/**", "/hotel-service/hotels/view/**",
                                         "/hotel-service/rooms/view/**")

@@ -16,6 +16,13 @@ spring:
       ddl-auto: validate
       format_sql: true
       show-sql: true
+  kafka:
+    bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS:localhost:9094}
+    hotel-service-topic: hotel
+    error-hotel-service-topic: hotel-error
+    payment-service-topic: payment
+    booking-service-topic: booking
+    error-booking-service-topic: booking-error
 
 management:
   endpoints:

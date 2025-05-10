@@ -6,7 +6,7 @@
 
     <changeSet id="create_booking_table" author="Anton-Zarubin">
         <createTable tableName="booking">
-            <column name="id" type="bigint" autoIncrement="true" defaultOnNull="false" generationType="ALWAYS">
+            <column name="id" type="bigint">
                 <constraints primaryKey="true" nullable="false" />
             </column>
             <column name="room_id" type="bigint">

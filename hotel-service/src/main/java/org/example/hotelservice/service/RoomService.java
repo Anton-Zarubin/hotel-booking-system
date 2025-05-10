@@ -1,11 +1,14 @@
 package org.example.hotelservice.service;
 
+import org.example.hotelservice.domain.Room;
 import org.example.hotelservice.dto.room.*;
 import org.springframework.data.domain.Pageable;
 
 public interface RoomService {
 
     RoomListResponse getAll(RoomFilter roomFilter, Pageable pageable);
+
+    Room getRoomById(Long id);
 
     RoomResponse getById(Long id);
 
