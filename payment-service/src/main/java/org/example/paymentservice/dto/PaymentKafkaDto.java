@@ -1,9 +1,6 @@
-package org.example.hotelservice.dto;
-
-import lombok.Builder;
+package org.example.paymentservice.dto;
 
 import java.math.BigDecimal;
 
-@Builder
 public record PaymentKafkaDto(Long bookingId, Long userId, String email, BigDecimal totalCost) {
 }

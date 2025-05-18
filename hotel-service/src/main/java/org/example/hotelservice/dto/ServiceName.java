@@ -2,6 +2,7 @@ package org.example.hotelservice.dto;
 
 public enum ServiceName {
 
-    HOTEL_SERVICE
+    HOTEL_SERVICE,
+    PAYMENT_SERVICE
 }
 

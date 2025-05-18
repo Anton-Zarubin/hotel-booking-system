@@ -1,6 +1,7 @@
 package org.example.hotelservice.service;
 
 import org.example.hotelservice.config.TestConfig;
+import org.example.hotelservice.domain.Hotel;
 import org.example.hotelservice.domain.Room;
 import org.example.hotelservice.dto.HotelKafkaDto;
 import org.example.hotelservice.repository.BookingRepository;
@@ -13,6 +14,7 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Optional;
 
@@ -38,6 +40,8 @@ public class BookingServiceTest {
 
     private HotelKafkaDto hotelKafkaDto;
 
+    private Room room;
+
     @BeforeEach
     public void setUp() {
         hotelKafkaDto = HotelKafkaDto.builder()
@@ -47,11 +51,26 @@ public class BookingServiceTest {
                 .checkOut(LocalDate.now().plusDays(2))
                 .email("user1@test.tst")
                 .build();
+
+        Hotel hotel = new Hotel();
+        hotel.setId(1L);
+        hotel.setName("Arbat Hotel");
+        hotel.setCity("Moscow");
+        hotel.setAddress("Plotnikov Lane, 12");
+        hotel.setDistanceFromCenter(2100);
+
+        room = new Room();
+        room.setName("Standard");
+        room.setDescription("some description");
+        room.setNumber(21);
+        room.setPrice(new BigDecimal("8400.00"));
+        room.setCapacity(2);
+        room.setHotel(hotel);
     }
 
     @Test
     void book() {
-        when(roomRepository.findById(1L)).thenReturn(Optional.of(new Room()));
+        when(roomRepository.findById(1L)).thenReturn(Optional.of(room));
         when(bookingRepository.isDatesAvailable(anyLong(), any(LocalDate.class),any(LocalDate.class))).thenReturn(true);
         assertDoesNotThrow(() -> bookingService.book(hotelKafkaDto));
     }

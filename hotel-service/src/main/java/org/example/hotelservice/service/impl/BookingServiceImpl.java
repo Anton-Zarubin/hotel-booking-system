@@ -2,6 +2,7 @@ package org.example.hotelservice.service.impl;
 
 import lombok.RequiredArgsConstructor;
 import org.example.hotelservice.domain.Booking;
+import org.example.hotelservice.domain.Room;
 import org.example.hotelservice.dto.*;
 import org.example.hotelservice.exception.EntityNotFoundException;
 import org.example.hotelservice.exception.UnavailableDatesException;
@@ -12,7 +13,9 @@ import org.example.hotelservice.service.RoomService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 
 @RequiredArgsConstructor
 @Service
@@ -28,14 +31,25 @@ public class BookingServiceImpl implements BookingService {
     @Override
     public void book(HotelKafkaDto hotelKafkaDto) {
         try {
+            Room room = roomService.getRoomById(hotelKafkaDto.roomId());
             if (bookingRepository.isDatesAvailable(hotelKafkaDto.roomId(), hotelKafkaDto.checkIn(), hotelKafkaDto.checkOut())) {
                 Booking booking = Booking.builder()
                         .id(hotelKafkaDto.bookingId())
-                        .room(roomService.getRoomById(hotelKafkaDto.roomId()))
+                        .room(room)
                         .checkIn(hotelKafkaDto.checkIn())
                         .checkOut(hotelKafkaDto.checkOut())
                         .build();
                 bookingRepository.save(booking);
+
+                BigDecimal totalCost = room.getPrice()
+                        .multiply(new BigDecimal(ChronoUnit.DAYS.between(hotelKafkaDto.checkIn(), hotelKafkaDto.checkOut())));
+                kafkaService.produce(PaymentKafkaDto.builder()
+                        .bookingId(hotelKafkaDto.bookingId())
+                        .userId(hotelKafkaDto.userId())
+                        .email(hotelKafkaDto.email())
+                        .totalCost(totalCost)
+                        .build()
+                );
 
                 StatusDto statusDto = createStatusDto(BookingStatus.PENDING, "The room can be booked. Payment is pending.");
                 kafkaService.produce(new BookingKafkaDto(hotelKafkaDto.bookingId(), statusDto));

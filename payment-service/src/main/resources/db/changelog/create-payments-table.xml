@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                                       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.0.xsd">
+
+    <changeSet id="create_payments_table" author="Anton-Zarubin">
+        <createTable tableName="payments">
+            <column name="id" type="bigint" autoIncrement="true" defaultOnNull="false" generationType="ALWAYS">
+                <constraints primaryKey="true" nullable="false" />
+            </column>
+            <column name="booking_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="cost" type="numeric">
+                <constraints nullable="false"/>
+            </column>
+            <column name="wallet_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="creation_time" type="timestamp">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addForeignKeyConstraint baseColumnNames="wallet_id"
+                                 baseTableName="payments" constraintName="fk_payment_wallet"
+                                 referencedColumnNames="id" referencedTableName="wallets"/>
+    </changeSet>
+
+</databaseChangeLog>

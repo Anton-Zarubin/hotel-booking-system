@@ -52,6 +52,21 @@ services:
     depends_on:
       - discovery
 
+  payment-service:
+    image: booking/payment-service:0.0.1-SNAPSHOT
+    ports:
+      - "8082:8082"
+    environment:
+      - CONFIG_URI=http://discovery:8761
+      - EUREKA_URI=http://discovery:8761/eureka
+      - DATABASE_URL=jdbc:postgresql://psql:5432/payment_db
+      - DATABASE_USER=postgres
+      - DATABASE_PASSWORD=postgres
+      - KAFKA_BOOTSTRAP_SERVERS=kafka:9092
+    restart: always
+    depends_on:
+      - discovery
+
   gateway:
     image: booking/gateway:0.0.1-SNAPSHOT
     ports:
@@ -65,3 +80,4 @@ services:
       - auth-service
       - booking-service
       - hotel-service
+      - payment-service

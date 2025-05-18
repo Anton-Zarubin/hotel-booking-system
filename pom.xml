@@ -22,6 +22,7 @@
         <module>gateway</module>
         <module>booking-service</module>
         <module>hotel-service</module>
+        <module>payment-service</module>
     </modules>
     <packaging>pom</packaging>
 

@@ -25,3 +25,5 @@ springdoc:
         url: /booking-service/v3/api-docs
       - name: hotel
         url: /hotel-service/v3/api-docs
+      - name: payment
+        url: /payment-service/v3/api-docs

@@ -42,6 +42,11 @@ public class GatewayConfig {
                                         .filter(authorizationGatewayFilterFactory.apply(new AuthorizationGatewayFilterFactory.Config("ROLE_ADMIN"))))
                                 .uri("lb://HOTEL-SERVICE")
                 )
+                .route(
+                        "payment_route", r -> r.path("/payment-service/**")
+                                .filters(f -> f.filter(authenticationFilter))
+                                .uri("lb://PAYMENT-SERVICE")
+                )
                 .build();
     }
 }
