@@ -48,6 +48,7 @@ public class BookingServiceImpl implements BookingService {
                         .userId(hotelKafkaDto.userId())
                         .email(hotelKafkaDto.email())
                         .totalCost(totalCost)
+                        .checkIn(hotelKafkaDto.checkIn())
                         .build()
                 );
 

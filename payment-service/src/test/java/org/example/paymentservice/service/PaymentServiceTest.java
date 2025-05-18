@@ -15,6 +15,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.Optional;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
@@ -42,7 +43,7 @@ public class PaymentServiceTest {
 
     @BeforeEach
     public void setUp() {
-        paymentKafkaDto = new PaymentKafkaDto(1L, 1L, "user1@test.tst", BigDecimal.TEN);
+        paymentKafkaDto = new PaymentKafkaDto(1L, 1L, "user1@test.tst", BigDecimal.TEN, LocalDate.now());
     }
 
     @Test

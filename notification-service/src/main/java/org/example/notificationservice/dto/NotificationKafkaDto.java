@@ -1,9 +1,6 @@
-package org.example.paymentservice.dto;
-
-import lombok.Builder;
+package org.example.notificationservice.dto;
 
 import java.time.LocalDate;
 
-@Builder
 public record NotificationKafkaDto(Long bookingId, Long userId, String email, LocalDate checkIn) {
 }

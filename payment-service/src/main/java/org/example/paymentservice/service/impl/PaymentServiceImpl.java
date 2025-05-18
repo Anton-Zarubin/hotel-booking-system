@@ -65,6 +65,7 @@ public class PaymentServiceImpl implements PaymentService {
                     .bookingId(bookingId)
                     .userId(userId))
                     .email(paymentKafkaDto.email())
+                    .checkIn(paymentKafkaDto.checkIn())
                     .build());
             kafkaService.produce(new BookingKafkaDto(bookingId, statusDto));
 
